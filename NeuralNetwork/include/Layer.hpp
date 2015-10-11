@@ -82,7 +82,7 @@ public:
     const std::vector<double>& errors() const { return errors_; }
 
 private:
-    int num_nodes_;                             // ノード数
+    int num_nodes_;                                   // ノード数
     std::vector<std::vector<double> > weights_list_;  // 重み
     std::vector<double> bias_weights_;                // バイアス
     std::vector<double> outputs_;                     // ニューロンの出力値
