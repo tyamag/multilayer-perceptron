@@ -66,11 +66,11 @@ void Layer::Init(const int child_layer_nodes_num,
         errors_[i] = 0.0;
     }
 
-    // d‚İ‚ğ—”‚Å‰Šú‰»
     if (child_layer_nodes_num < 1) {
         return;
     }
 
+    // d‚İ‚ğ—”‚Å‰Šú‰»
     std::random_device rand;
     std::mt19937 mt(rand());
     std::uniform_real_distribution<> rand_dist(default_weight_min, default_weight_max);
