@@ -34,8 +34,7 @@ int main() {
     neural_net.Train(inputs_list, answers_list, num_epoch);
 
     // Œ‹‰Ê•\¦
-    for (unsigned int i = 0; i < inputs_list.size(); ++i) {
-        const auto& inputs = inputs_list[i];
+    for (const auto& inputs : inputs_list) {
         const auto& outputs = neural_net.Foward(inputs);
         for (const auto& output : outputs) {
             std::cout << output << ", ";
