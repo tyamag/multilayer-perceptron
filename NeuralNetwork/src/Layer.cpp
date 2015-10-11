@@ -7,39 +7,10 @@
 
 namespace ccilab {
 
-Layer::Layer(const int num_nodes)
+Layer::Layer(const int num_nodes, const int num_child_nodes,
+        const double default_weight_min, const double default_weight_max)
     : num_nodes_(num_nodes) {
-}
-
-void Layer::Init(const int child_layer_nodes_num,
-    const double default_weight_min, const double default_weight_max) {
-    outputs_.resize(num_nodes_);
-    errors_.resize(num_nodes_);
-    for (int i = 0; i < num_nodes_; ++i) {
-        outputs_[i] = 0.0;
-        errors_[i] = 0.0;
-    }
-
-    // d‚Ý‚ð—”‚Å‰Šú‰»
-    if (child_layer_nodes_num < 1) {
-        return;
-    }
-
-    std::random_device rand;
-    std::mt19937 mt(rand());
-    std::uniform_real_distribution<> rand_dist(default_weight_min, default_weight_max);
-    weights_list_.resize(child_layer_nodes_num);
-    for (auto& weights : weights_list_) {
-        weights.resize(num_nodes_ );
-        for (auto& weight : weights) {
-            weight = rand_dist(mt);
-        }
-    }
-
-    bias_weights_.resize(child_layer_nodes_num);
-    for (auto& bias_weight : bias_weights_) {
-        bias_weight = rand_dist(mt);
-    }
+        Init(num_child_nodes, default_weight_min, default_weight_max);
 }
 
 void Layer::CalculateOutputs(const std::vector<double>& inputs) {
@@ -83,6 +54,37 @@ void Layer::UpdateWeights(const Layer& child_layer, const double learning_rate) 
 
     for (int i = 0; i < child_layer.num_nodes(); ++i) {
         bias_weights_[i] += -learning_rate * child_layer.errors()[i] * 1;
+    }
+}
+
+void Layer::Init(const int child_layer_nodes_num,
+    const double default_weight_min, const double default_weight_max) {
+    outputs_.resize(num_nodes_);
+    errors_.resize(num_nodes_);
+    for (int i = 0; i < num_nodes_; ++i) {
+        outputs_[i] = 0.0;
+        errors_[i] = 0.0;
+    }
+
+    // d‚Ý‚ð—”‚Å‰Šú‰»
+    if (child_layer_nodes_num < 1) {
+        return;
+    }
+
+    std::random_device rand;
+    std::mt19937 mt(rand());
+    std::uniform_real_distribution<> rand_dist(default_weight_min, default_weight_max);
+    weights_list_.resize(child_layer_nodes_num);
+    for (auto& weights : weights_list_) {
+        weights.resize(num_nodes_ );
+        for (auto& weight : weights) {
+            weight = rand_dist(mt);
+        }
+    }
+
+    bias_weights_.resize(child_layer_nodes_num);
+    for (auto& bias_weight : bias_weights_) {
+        bias_weight = rand_dist(mt);
     }
 }
 

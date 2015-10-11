@@ -7,17 +7,6 @@ NeuralNetwork::NeuralNetwork(const NeuralNetworkParameter& param)
     Init(param);
 }
 
-bool NeuralNetwork::Init(const NeuralNetworkParameter& param) {
-    for (const int num_nodes : param.num_nodes_list_) {
-        if (num_nodes < 0) {
-            return false;
-        }
-        layers_.emplace_back(num_nodes);
-    }
-
-    return ConnectLayers(param);
-}
-
 bool NeuralNetwork::Train(const std::vector<std::vector<double> >& inputs_list,
     const std::vector<std::vector<double> >& answers_list, const int num_epoch) {
     if (inputs_list.empty() || answers_list.empty()
@@ -79,17 +68,17 @@ double NeuralNetwork::CalculateError(const std::vector<double>& answers) const {
     return error;
 }
 
-bool NeuralNetwork::ConnectLayers(const NeuralNetworkParameter& param) {
-    if (layers_.empty()) {
-        return false;
-    }
-
-    for (unsigned int i = 0; i < layers_.size(); ++i) {
-        const int child_layer_nodes_num =
-            (i == layers_.size() - 1) ? 0 : layers_[i + 1].num_nodes();
+bool NeuralNetwork::Init(const NeuralNetworkParameter& param) {
+    for (unsigned int i = 0; i < param.num_nodes_list_.size(); ++i) {
+        const int num_nodes = param.num_nodes_list_[i];
+        if (num_nodes < 0) {
+            return false;
+        }
+        const int num_child_nodes =
+            (i == param.num_nodes_list_.size() - 1) ? 0 : param.num_nodes_list_[i + 1];
         const double initial_weight_min = param.initial_weight_minmax.first;
         const double initial_weight_max = param.initial_weight_minmax.second;
-        layers_[i].Init(child_layer_nodes_num, initial_weight_min, initial_weight_max);
+        layers_.emplace_back(num_nodes, num_child_nodes, initial_weight_min, initial_weight_max);
     }
 
     return true;

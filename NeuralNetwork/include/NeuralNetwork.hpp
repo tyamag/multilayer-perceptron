@@ -61,12 +61,6 @@ private:
      * @param param ネットワークのパラメータ
      */
     bool Init(const NeuralNetworkParameter& param);
-
-    /**
-     * @brief レイヤーをつなげる.
-     * @param param ネットワークのパラメータ
-     */
-    bool ConnectLayers(const NeuralNetworkParameter& param);
 };
 
 }  // namespace ccilab

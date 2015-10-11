@@ -30,7 +30,7 @@ int main() {
     };
 
     // ネットワークの訓練
-    const int num_epoch = 10000;
+    const int num_epoch = 50000;
     neural_net.Train(inputs_list, answers_list, num_epoch);
 
     // 結果表示

@@ -10,16 +10,16 @@ namespace ccilab {
  */
 class Layer {
 public:
-    explicit Layer(int num_nodes);
-    ~Layer() {}
-
     /**
-     * @brief レイヤーを初期化する.
+     * @brief レイヤーを初期化する
+     * @param num_nodes ノード数
      * @param child_layer_nodes_num 子層(次の層)のノード数
      * @param default_weight_min 重み初期値の最小
      * @param default_weight_max 重み初期値の最大
      */
-    void Init(int child_layer_nodes_num, double default_weight_min, double default_weight_max);
+    Layer(int num_nodes, int child_layer_nodes_num,
+        double default_weight_min, double default_weight_max);
+    ~Layer() {}
 
     /**
      * @brief すべてのノードの出力値を計算し, 更新する.
@@ -87,6 +87,14 @@ private:
     std::vector<double> bias_weights_;                // バイアス
     std::vector<double> outputs_;                     // ニューロンの出力値
     std::vector<double> errors_;                      // 誤差信号
+
+    /**
+     * @brief レイヤーを初期化する.
+     * @param num_child_nodes 子層(次の層)のノード数
+     * @param default_weight_min 重み初期値の最小
+     * @param default_weight_max 重み初期値の最大
+     */
+    void Init(int num_child_nodes, double default_weight_min, double default_weight_max);
 };
 
 }  // namespace ccilab
