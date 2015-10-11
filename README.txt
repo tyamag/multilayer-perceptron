@@ -1,1 +1,0 @@
-Multilayer perceptron program for C++.
