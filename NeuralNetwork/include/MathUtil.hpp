@@ -1,4 +1,4 @@
-#ifndef MATH_UTIL_HPP_
+﻿#ifndef MATH_UTIL_HPP_
 #define MATH_UTIL_HPP_
 
 #include <cmath>

@@ -1,4 +1,4 @@
-#ifndef LAYER_HPP_
+ï»¿#ifndef LAYER_HPP_
 #define LAYER_HPP_
 
 #include <vector>
@@ -6,93 +6,93 @@
 namespace ccilab {
 
 /**
- * @brief ƒlƒbƒgƒ[ƒN‚ğ\¬‚·‚éƒŒƒCƒ„[(‘w).
+ * @brief ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚’æ§‹æˆã™ã‚‹ãƒ¬ã‚¤ãƒ¤ãƒ¼(å±¤).
  */
 class Layer {
 public:
     /**
-     * @brief ƒŒƒCƒ„[‚ğ‰Šú‰»‚·‚é
-     * @param num_nodes ƒm[ƒh”
-     * @param child_layer_nodes_num q‘w(Ÿ‚Ì‘w)‚Ìƒm[ƒh”
-     * @param default_weight_min d‚İ‰Šú’l‚ÌÅ¬
-     * @param default_weight_max d‚İ‰Šú’l‚ÌÅ‘å
+     * @brief ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’åˆæœŸåŒ–ã™ã‚‹
+     * @param num_nodes ãƒãƒ¼ãƒ‰æ•°
+     * @param child_layer_nodes_num å­å±¤(æ¬¡ã®å±¤)ã®ãƒãƒ¼ãƒ‰æ•°
+     * @param default_weight_min é‡ã¿åˆæœŸå€¤ã®æœ€å°
+     * @param default_weight_max é‡ã¿åˆæœŸå€¤ã®æœ€å¤§
      */
     Layer(int num_nodes, int child_layer_nodes_num,
         double default_weight_min, double default_weight_max);
     ~Layer() {}
 
     /**
-     * @brief ‚·‚×‚Ä‚Ìƒm[ƒh‚Ìo—Í’l‚ğŒvZ‚µ, XV‚·‚é.
-     *        “ü—Í‘w‚Ìo—Í’l‚ğXV‚·‚é‚Æ‚«‚Ég‚¤.
-     * @param inputs “ü—Íƒf[ƒ^
+     * @brief ã™ã¹ã¦ã®ãƒãƒ¼ãƒ‰ã®å‡ºåŠ›å€¤ã‚’è¨ˆç®—ã—, æ›´æ–°ã™ã‚‹.
+     *        å…¥åŠ›å±¤ã®å‡ºåŠ›å€¤ã‚’æ›´æ–°ã™ã‚‹ã¨ãã«ä½¿ã†.
+     * @param inputs å…¥åŠ›ãƒ‡ãƒ¼ã‚¿
      */
     void CalculateOutputs(const std::vector<double>& inputs);
 
     /**
-     * @brief ‚·‚×‚Ä‚Ìƒm[ƒh‚Ìo—Í’l‚ğŒvZ‚µ, XV‚·‚é.
-     *        ’†ŠÔ‘w`o—Í‘w‚Ìo—Í’l‚ğXV‚·‚é‚Æ‚«‚Ég‚¤.
-     * @param parent_layer e‘w(‘O‚Ì‘w)
+     * @brief ã™ã¹ã¦ã®ãƒãƒ¼ãƒ‰ã®å‡ºåŠ›å€¤ã‚’è¨ˆç®—ã—, æ›´æ–°ã™ã‚‹.
+     *        ä¸­é–“å±¤ï½å‡ºåŠ›å±¤ã®å‡ºåŠ›å€¤ã‚’æ›´æ–°ã™ã‚‹ã¨ãã«ä½¿ã†.
+     * @param parent_layer è¦ªå±¤(å‰ã®å±¤)
      */
     void CalculateOutputs(const Layer& parent_layer);
 
     /**
-     * @brief ‚·‚×‚Ä‚Ìƒm[ƒh‚ÌŒë·M†‚ğŒvZ‚µ, XV‚·‚é.
-     *        o—Í‘w‚ÌŒë·M†‚ğXV‚·‚é‚Æ‚«‚Ég‚¤.
-     * @param answers ³‰ğƒf[ƒ^
+     * @brief ã™ã¹ã¦ã®ãƒãƒ¼ãƒ‰ã®èª¤å·®ä¿¡å·ã‚’è¨ˆç®—ã—, æ›´æ–°ã™ã‚‹.
+     *        å‡ºåŠ›å±¤ã®èª¤å·®ä¿¡å·ã‚’æ›´æ–°ã™ã‚‹ã¨ãã«ä½¿ã†.
+     * @param answers æ­£è§£ãƒ‡ãƒ¼ã‚¿
      */
     void CalculateErrors(const std::vector<double>& answers);
 
     /**
-     * @brief ‚·‚×‚Ä‚Ìƒm[ƒh‚ÌŒë·M†‚ğŒvZ‚µ, XV‚·‚é.
-     *        ’†ŠÔ‘w‚ÌŒë·M†‚ğXV‚·‚é‚Æ‚«‚Ég‚¤.
-     * @param child_layer q‘w
+     * @brief ã™ã¹ã¦ã®ãƒãƒ¼ãƒ‰ã®èª¤å·®ä¿¡å·ã‚’è¨ˆç®—ã—, æ›´æ–°ã™ã‚‹.
+     *        ä¸­é–“å±¤ã®èª¤å·®ä¿¡å·ã‚’æ›´æ–°ã™ã‚‹ã¨ãã«ä½¿ã†.
+     * @param child_layer å­å±¤
      */
     void CalculateErrors(const Layer& child_layer);
 
     /**
-     * @brief ‚·‚×‚Ä‚Ìd‚İ‚ğXV‚·‚é.
-     * @param child_layer q‘w
-     * @param learning_rate ŠwK—¦
+     * @brief ã™ã¹ã¦ã®é‡ã¿ã‚’æ›´æ–°ã™ã‚‹.
+     * @param child_layer å­å±¤
+     * @param learning_rate å­¦ç¿’ç‡
      */
     void UpdateWeights(const Layer& child_layer, double learning_rate);
 
     /**
-     * @brief ƒm[ƒh”‚ğ•Ô‚·.
+     * @brief ãƒãƒ¼ãƒ‰æ•°ã‚’è¿”ã™.
      */
     int num_nodes() const { return num_nodes_; }
 
     /**
-     * @brief d‚İ‚ğ•Ô‚·.
+     * @brief é‡ã¿ã‚’è¿”ã™.
      */
     const std::vector<std::vector<double> >& weights_list() const { return weights_list_; }
 
     /**
-     * @brief ƒoƒCƒAƒX‚ğ•Ô‚·.
+     * @brief ãƒã‚¤ã‚¢ã‚¹ã‚’è¿”ã™.
      */
     const std::vector<double>& bias_weights() const { return bias_weights_; }
 
     /**
-     * @brief o—Í’l‚ğ•Ô‚·.
+     * @brief å‡ºåŠ›å€¤ã‚’è¿”ã™.
      */
     const std::vector<double>& outputs() const { return outputs_; }
 
     /**
-     * @brief Œë·M†‚ğ•Ô‚·.
+     * @brief èª¤å·®ä¿¡å·ã‚’è¿”ã™.
      */
     const std::vector<double>& errors() const { return errors_; }
 
 private:
-    int num_nodes_;                                   // ƒm[ƒh”
-    std::vector<std::vector<double> > weights_list_;  // d‚İ
-    std::vector<double> bias_weights_;                // ƒoƒCƒAƒX
-    std::vector<double> outputs_;                     // ƒjƒ…[ƒƒ“‚Ìo—Í’l
-    std::vector<double> errors_;                      // Œë·M†
+    int num_nodes_;                                   // ãƒãƒ¼ãƒ‰æ•°
+    std::vector<std::vector<double> > weights_list_;  // é‡ã¿
+    std::vector<double> bias_weights_;                // ãƒã‚¤ã‚¢ã‚¹
+    std::vector<double> outputs_;                     // ãƒ‹ãƒ¥ãƒ¼ãƒ­ãƒ³ã®å‡ºåŠ›å€¤
+    std::vector<double> errors_;                      // èª¤å·®ä¿¡å·
 
     /**
-     * @brief ƒŒƒCƒ„[‚ğ‰Šú‰»‚·‚é.
-     * @param num_child_nodes q‘w(Ÿ‚Ì‘w)‚Ìƒm[ƒh”
-     * @param default_weight_min d‚İ‰Šú’l‚ÌÅ¬
-     * @param default_weight_max d‚İ‰Šú’l‚ÌÅ‘å
+     * @brief ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’åˆæœŸåŒ–ã™ã‚‹.
+     * @param num_child_nodes å­å±¤(æ¬¡ã®å±¤)ã®ãƒãƒ¼ãƒ‰æ•°
+     * @param default_weight_min é‡ã¿åˆæœŸå€¤ã®æœ€å°
+     * @param default_weight_max é‡ã¿åˆæœŸå€¤ã®æœ€å¤§
      */
     void Init(int num_child_nodes, double default_weight_min, double default_weight_max);
 };

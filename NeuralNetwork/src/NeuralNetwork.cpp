@@ -1,4 +1,4 @@
-#include "NeuralNetwork.hpp"
+ï»¿#include "NeuralNetwork.hpp"
 
 namespace ccilab {
 
@@ -25,10 +25,10 @@ bool NeuralNetwork::Train(const std::vector<std::vector<double> >& inputs_list,
 }
 
 const std::vector<double>& NeuralNetwork::Foward(const std::vector<double>& inputs) {
-    // “ü—Í‘w
+    // å…¥åŠ›å±¤
     layers_[0].CalculateOutputs(inputs);
 
-    // ’†ŠÔ‘w`o—Í‘w
+    // ä¸­é–“å±¤ï½å‡ºåŠ›å±¤
     for (unsigned int i = 1; i < layers_.size(); ++i) {
         const auto& parent_layer = layers_[i - 1];
         layers_[i].CalculateOutputs(parent_layer);
@@ -38,17 +38,17 @@ const std::vector<double>& NeuralNetwork::Foward(const std::vector<double>& inpu
 }
 
 void NeuralNetwork::Backward(const std::vector<double>& answers) {
-    // o—Í‘w
+    // å‡ºåŠ›å±¤
     int out_layer_idx = layers_.size() - 1;
     layers_[out_layer_idx].CalculateErrors(answers);
 
-    // ’†ŠÔ‘w
+    // ä¸­é–“å±¤
     for (int i = out_layer_idx - 1; i > 0; --i) {
         const auto& child_layer = layers_[i + 1];
         layers_[i].CalculateErrors(child_layer);
     }
 
-    // ’†ŠÔ‘w`“ü—Í‘w‚Ìd‚İ‚ğXV
+    // ä¸­é–“å±¤ï½å…¥åŠ›å±¤ã®é‡ã¿ã‚’æ›´æ–°
     for (int i = out_layer_idx - 1; i >= 0; --i) {
         const auto& child_layer = layers_[i + 1];
         layers_[i].UpdateWeights(child_layer, learning_rate_);

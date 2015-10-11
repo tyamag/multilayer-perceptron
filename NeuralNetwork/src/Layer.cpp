@@ -1,4 +1,4 @@
-#include "Layer.hpp"
+ï»¿#include "Layer.hpp"
 
 #include <numeric>
 #include <random>
@@ -70,7 +70,7 @@ void Layer::Init(const int child_layer_nodes_num,
         return;
     }
 
-    // d‚İ‚ğ—”‚Å‰Šú‰»
+    // é‡ã¿ã‚’ä¹±æ•°ã§åˆæœŸåŒ–
     std::random_device rand;
     std::mt19937 mt(rand());
     std::uniform_real_distribution<> rand_dist(default_weight_min, default_weight_max);

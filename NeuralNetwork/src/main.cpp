@@ -1,19 +1,19 @@
-// exclusive or ‚ÌŠwK
+ï»¿// exclusive or ã®å­¦ç¿’
 
 #include "NeuralNetwork.hpp"
 
 #include <iostream>
 
 int main() {
-    // ƒjƒ…[ƒ‰ƒ‹ƒlƒbƒg‚Ì\’z
+    // ãƒ‹ãƒ¥ãƒ¼ãƒ©ãƒ«ãƒãƒƒãƒˆã®æ§‹ç¯‰
     ccilab::NeuralNetworkParameter net_param = {
-        {2, 2, 1},    // Še‘w‚Ìƒm[ƒh”(“ü—Í‘w, ’†ŠÔ‘w, o—Í‘w)
-        {-0.1, 0.1},  // d‚İ‰Šú’lÅ¬Å‘å
-        0.2,          // ŠwK—¦
+        {2, 2, 1},    // å„å±¤ã®ãƒãƒ¼ãƒ‰æ•°(å…¥åŠ›å±¤, ä¸­é–“å±¤, å‡ºåŠ›å±¤)
+        {-0.1, 0.1},  // é‡ã¿åˆæœŸå€¤æœ€å°æœ€å¤§
+        0.2,          // å­¦ç¿’ç‡
     };
     ccilab::NeuralNetwork neural_net(net_param);
 
-    // “ü—Íƒf[ƒ^
+    // å…¥åŠ›ãƒ‡ãƒ¼ã‚¿
     std::vector<std::vector<double> > inputs_list = {
         {0, 0},
         {0, 1},
@@ -21,7 +21,7 @@ int main() {
         {1, 1},
     };
 
-    // ³‰ğƒf[ƒ^
+    // æ­£è§£ãƒ‡ãƒ¼ã‚¿
     std::vector<std::vector<double> > answers_list = {
         {0},
         {1},
@@ -29,11 +29,11 @@ int main() {
         {0},
     };
 
-    // ƒlƒbƒgƒ[ƒN‚ÌŒP—û
+    // ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã®è¨“ç·´
     const int num_epoch = 50000;
     neural_net.Train(inputs_list, answers_list, num_epoch);
 
-    // Œ‹‰Ê•\¦
+    // çµæœè¡¨ç¤º
     for (const auto& inputs : inputs_list) {
         const auto& outputs = neural_net.Foward(inputs);
         for (const auto& output : outputs) {

@@ -1,4 +1,4 @@
-#ifndef NEURAL_NETWORK_HPP_
+ï»¿#ifndef NEURAL_NETWORK_HPP_
 #define NEURAL_NETWORK_HPP_
 
 #include <utility>
@@ -8,57 +8,57 @@
 namespace ccilab {
 
 /**
- * @brief ƒjƒ…[ƒ‰ƒ‹ƒlƒbƒgƒ[ƒN‰Šú‰»‚É—p‚¢‚éƒpƒ‰ƒ[ƒ^[
+ * @brief ãƒ‹ãƒ¥ãƒ¼ãƒ©ãƒ«ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯åˆæœŸåŒ–ã«ç”¨ã„ã‚‹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼
  */
 struct NeuralNetworkParameter {
-    std::vector<int> num_nodes_list_;                 // Še‘w‚Ìƒm[ƒh”
-    std::pair<double, double> initial_weight_minmax;  // d‚İ‰Šú’l‚ÌÅ¬, Å‘å
-    double learning_rate_;                            // ŠwK—¦
+    std::vector<int> num_nodes_list_;                 // å„å±¤ã®ãƒãƒ¼ãƒ‰æ•°
+    std::pair<double, double> initial_weight_minmax;  // é‡ã¿åˆæœŸå€¤ã®æœ€å°, æœ€å¤§
+    double learning_rate_;                            // å­¦ç¿’ç‡
 };
 
 /**
- * @brief ƒjƒ…[ƒ‰ƒ‹ƒlƒbƒgƒ[ƒN.
+ * @brief ãƒ‹ãƒ¥ãƒ¼ãƒ©ãƒ«ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯.
  */
 class NeuralNetwork {
 public:
     /**
-     * @brief ƒlƒbƒgƒ[ƒN‚Ìƒpƒ‰ƒ[ƒ^‚ğ‚à‚Æ‚É‰Šú‰»‚·‚é
-     * @param ƒlƒbƒgƒ[ƒN‚Ìƒpƒ‰ƒ[ƒ^
+     * @brief ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’ã‚‚ã¨ã«åˆæœŸåŒ–ã™ã‚‹
+     * @param ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
      */
     NeuralNetwork(const NeuralNetworkParameter& param);
     ~NeuralNetwork() {}
 
     /**
-     * @brief ƒlƒbƒgƒ[ƒN‚ğŠwK‚·‚é
-     * @param inputs “ü—Íƒf[ƒ^
-     * @param answers ³‰ğƒf[ƒ^
-     * @param num_epoch ƒGƒ|ƒbƒN”(ŠwK‰ñ”)
+     * @brief ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚’å­¦ç¿’ã™ã‚‹
+     * @param inputs å…¥åŠ›ãƒ‡ãƒ¼ã‚¿
+     * @param answers æ­£è§£ãƒ‡ãƒ¼ã‚¿
+     * @param num_epoch ã‚¨ãƒãƒƒã‚¯æ•°(å­¦ç¿’å›æ•°)
      */
     bool Train(const std::vector<std::vector<double> >& inputs_list,
         const std::vector<std::vector<double> >& answers_list, int num_epoch);
 
     /**
-     * @brief ‡•ûŒü“`”À.
+     * @brief é †æ–¹å‘ä¼æ¬.
      */
     const std::vector<double>& Foward(const std::vector<double>& inputs);
 
     /**
-     * @brief Œë·‹t“`”À.
+     * @brief èª¤å·®é€†ä¼æ¬.
      */
     void Backward(const std::vector<double>& answers);
 
     /**
-     * @brief Œë·‚ğŒvZ‚µ‚Ä•Ô‚·.
+     * @brief èª¤å·®ã‚’è¨ˆç®—ã—ã¦è¿”ã™.
      */
     double CalculateError(const std::vector<double>& answers) const;
 
 private:
-    std::vector<Layer> layers_;  // ƒŒƒCƒ„[
-    double learning_rate_;       // ŠwK—¦
+    std::vector<Layer> layers_;  // ãƒ¬ã‚¤ãƒ¤ãƒ¼
+    double learning_rate_;       // å­¦ç¿’ç‡
 
     /**
-     * @brief ƒlƒbƒgƒ[ƒN‚ğ‰Šú‰»‚·‚é.
-     * @param param ƒlƒbƒgƒ[ƒN‚Ìƒpƒ‰ƒ[ƒ^
+     * @brief ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚’åˆæœŸåŒ–ã™ã‚‹.
+     * @param param ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
      */
     bool Init(const NeuralNetworkParameter& param);
 };
