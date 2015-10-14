@@ -11,15 +11,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Layer.hpp" />
-    <ClInclude Include="include\MathUtil.hpp" />
-    <ClInclude Include="include\NeuralNetwork.hpp" />
+    <ClInclude Include="include\NeuralNetLib\Layer.hpp" />
+    <ClInclude Include="include\NeuralNetLib\MathUtil.hpp" />
+    <ClInclude Include="include\NeuralNetLib\NeuralNet.hpp" />
+    <ClInclude Include="include\picojson\picojson.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Layer.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\MathUtil.cpp" />
-    <ClCompile Include="src\NeuralNetwork.cpp" />
+    <ClCompile Include="src\NeuralNetLib\Layer.cpp" />
+    <ClCompile Include="src\NeuralNetLib\MathUtil.cpp" />
+    <ClCompile Include="src\NeuralNetLib\NeuralNet.cpp" />
+    <ClCompile Include="src\test\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1C032A35-2293-4708-B592-B438BF3C1E95}</ProjectGuid>

@@ -1,13 +1,21 @@
-﻿#include "NeuralNetwork.hpp"
+﻿#include "NeuralNetLib/NeuralNet.hpp"
+
+#define PICOJSON_USE_INT64
+#include "picojson/picojson.h"
 
 namespace ccilab {
 
-NeuralNetwork::NeuralNetwork(const NeuralNetworkParameter& param)
+NeuralNet::NeuralNet(const NeuralNetParameter& param)
     : learning_rate_(param.learning_rate_) {
     Init(param);
 }
 
-bool NeuralNetwork::Train(const std::vector<std::vector<double> >& inputs_list,
+NeuralNet::NeuralNet(const std::string& model_file_path)
+    : learning_rate_(0) {
+    Init(model_file_path);
+}
+
+bool NeuralNet::Train(const std::vector<std::vector<double> >& inputs_list,
     const std::vector<std::vector<double> >& answers_list, const int num_epoch) {
     if (inputs_list.empty() || answers_list.empty()
         || inputs_list.size() != answers_list.size()) {
@@ -24,7 +32,7 @@ bool NeuralNetwork::Train(const std::vector<std::vector<double> >& inputs_list,
     return true;
 }
 
-const std::vector<double>& NeuralNetwork::Foward(const std::vector<double>& inputs) {
+const std::vector<double>& NeuralNet::Foward(const std::vector<double>& inputs) {
     // 入力層
     layers_[0].CalculateOutputs(inputs);
 
@@ -37,7 +45,7 @@ const std::vector<double>& NeuralNetwork::Foward(const std::vector<double>& inpu
     return layers_[layers_.size() - 1].outputs();
 }
 
-void NeuralNetwork::Backward(const std::vector<double>& answers) {
+void NeuralNet::Backward(const std::vector<double>& answers) {
     // 出力層
     int out_layer_idx = layers_.size() - 1;
     layers_[out_layer_idx].CalculateErrors(answers);
@@ -55,7 +63,7 @@ void NeuralNetwork::Backward(const std::vector<double>& answers) {
     }
 }
 
-double NeuralNetwork::CalculateError(const std::vector<double>& answers) const {
+double NeuralNet::CalculateError(const std::vector<double>& answers) const {
     double error = 0.0;
     const auto& out_layer = layers_[layers_.size() - 1];
     for (unsigned int i = 0; i < out_layer.outputs().size(); ++i) {
@@ -68,7 +76,48 @@ double NeuralNetwork::CalculateError(const std::vector<double>& answers) const {
     return error;
 }
 
-bool NeuralNetwork::Init(const NeuralNetworkParameter& param) {
+void NeuralNet::SaveModel() {
+    picojson::object net_json;
+
+    // レイヤー
+    // TODO Layer クラスに実装する
+    picojson::array layers_json;
+    for (const auto& layer : layers_) {
+        // ノード数
+        picojson::object layer_json;
+        const int64_t num_nodes = static_cast<int64_t>(layer.num_nodes());
+        layer_json["num_nodes"] = picojson::value(num_nodes);
+
+        // 重み
+        picojson::array weights_list_json;
+        for (const auto& weights : layer.weights_list()) {
+            picojson::array weights_json;
+            for (const auto weight : weights) {
+                weights_json.push_back(picojson::value(weight));
+            }
+            weights_list_json.push_back(picojson::value(weights_json));
+        }
+        layer_json["weights_list"] = picojson::value(weights_list_json);
+
+        // バイアス
+        picojson::array bias_weights_json;
+        for (const auto& bias_weight : layer.bias_weights()) {
+            bias_weights_json.push_back(picojson::value(bias_weight));
+        }
+        layer_json["bias_weights"] = picojson::value(bias_weights_json);
+
+        layers_json.push_back(picojson::value(layer_json));
+    }
+    net_json["layers"] = picojson::value(layers_json);
+
+    // 学習率
+    net_json["learning_rate"] = picojson::value(learning_rate_);
+
+    picojson::value model_json(net_json);
+    std::cout << model_json.serialize() << std::endl;
+}
+
+bool NeuralNet::Init(const NeuralNetParameter& param) {
     for (unsigned int i = 0; i < param.num_nodes_list_.size(); ++i) {
         const int num_nodes = param.num_nodes_list_[i];
         if (num_nodes < 0) {
@@ -82,6 +131,10 @@ bool NeuralNetwork::Init(const NeuralNetworkParameter& param) {
     }
 
     return true;
+}
+
+bool NeuralNet::Init(const std::string& model_file_path) {
+
 }
 
 }  // namespace ccilab

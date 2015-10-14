@@ -1,4 +1,4 @@
-﻿#include "MathUtil.hpp"
+﻿#include "NeuralNetLib/MathUtil.hpp"
 
 #include <cmath>
 

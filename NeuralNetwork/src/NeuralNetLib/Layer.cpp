@@ -1,9 +1,9 @@
-﻿#include "Layer.hpp"
+﻿#include "NeuralNetLib/Layer.hpp"
 
 #include <numeric>
 #include <random>
 
-#include "MathUtil.hpp"
+#include "NeuralNetLib/MathUtil.hpp"
 
 namespace ccilab {
 

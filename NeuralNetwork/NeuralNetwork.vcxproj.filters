@@ -15,27 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\NeuralNetwork.hpp">
+    <ClInclude Include="include\NeuralNetLib\Layer.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="include\Layer.hpp">
+    <ClInclude Include="include\NeuralNetLib\MathUtil.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="include\MathUtil.hpp">
+    <ClInclude Include="include\NeuralNetLib\NeuralNet.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="include\picojson\picojson.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
+    <ClCompile Include="src\NeuralNetLib\Layer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\Layer.cpp">
+    <ClCompile Include="src\NeuralNetLib\MathUtil.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\NeuralNetwork.cpp">
+    <ClCompile Include="src\NeuralNetLib\NeuralNet.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\MathUtil.cpp">
+    <ClCompile Include="src\test\main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
